@@ -1,7 +1,7 @@
 import { formatAsteroids } from "../helperFunctions/formatData";
 import { setSearchParams } from "../helperFunctions/setSearchParams";
 import { AsteroidsInfo } from "../types/AsteroidInfo";
-import { ErrorMessage } from "../types/ErrorMessages"
+import { ErrorMessages } from "../types/ErrorMessages"
 import { requestMethods } from "./fetchData"
 
 export const getAsteroids = async (date: string) => {
@@ -23,6 +23,6 @@ export const getAsteroids = async (date: string) => {
 
     return formattedAsteroids;
   } catch (error) {
-    throw new Error(error as ErrorMessage)
+    throw new Error(error as ErrorMessages)
   }
 }

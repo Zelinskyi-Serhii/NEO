@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import './App.scss'
 import { getAsteroids } from './api/getAsteroids'
-import { ErrorMessage } from './types/ErrorMessages'
+import { ErrorMessages } from './types/ErrorMessages'
 import { AsteroidStatistic } from './types/AsteroidStatistic'
 import { AsteroidList } from './components/AsteroidsList'
 
 export const App = () => {
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessages | null>(null);
   const [asteroids, setAsteroids] = useState<AsteroidStatistic[]>([]);
 
   const loadAsteroids = useCallback(async(newDate: string) => {
@@ -22,7 +22,7 @@ export const App = () => {
       });
       setErrorMessage(null);
     } catch (error) {
-      setErrorMessage(error as ErrorMessage);
+      setErrorMessage(error as ErrorMessages);
     }
   }, []);
 
@@ -52,12 +52,14 @@ export const App = () => {
     getCurrentDate();
   }, [loadAsteroids]);
 
-  const mappedAsteroids = asteroids.map(a => ({...a}));
+  const mappedAsteroids = asteroids.map(asteroid => ({...asteroid}));
+
   const sortedAsteroids = [...mappedAsteroids].sort((prev, curr) => (
     curr.potentiallyDangerousSum - prev.potentiallyDangerousSum
-  )).slice(0, 2);
-  console.log(sortedAsteroids);
-  
+    || prev.closestNEO - curr.closestNEO
+  ));
+
+  const slicedFirstTwo = sortedAsteroids.slice(0, 2);
 
   return (
     <div className="app">
@@ -66,7 +68,7 @@ export const App = () => {
       )}
       <AsteroidList 
         asteroids={asteroids}
-        sortedAsteroids={sortedAsteroids}
+        sortedAsteroids={slicedFirstTwo}
       />
     </div>
   )

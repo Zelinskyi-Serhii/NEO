@@ -37,7 +37,8 @@ export const AsteroidList: FC<Props> = ({ asteroids, sortedAsteroids }) => (
           closestNEO,
           fastestNEO,
         } = asteroid;
-        const isTheMostDangerous = [...sortedAsteroids].some(asteroid => asteroid.id === id) && potentiallyDangerousSum > 0;
+        const isTheMostDangerous = [...sortedAsteroids]
+          .some(asteroid => asteroid.id === id) && potentiallyDangerousSum > 0;
 
         return (
           <TableRow

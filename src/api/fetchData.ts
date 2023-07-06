@@ -1,4 +1,4 @@
-import { ErrorMessage } from "../types/ErrorMessages";
+import { ErrorMessages } from "../types/ErrorMessages";
 import { RequestMethods } from "../types/RequestMethods";
 
 
@@ -20,7 +20,7 @@ async function request<DataModel>(
 
     return parsedData;
   } catch {
-    throw new Error(ErrorMessage.LOAD_DATA);
+    throw new Error(ErrorMessages.LOAD_DATA);
   }
 }
 
