@@ -6,17 +6,12 @@ async function request<DataModel>(
   url: URL,
   method: RequestMethods = RequestMethods.GET,
   headers: unknown = null,
-  data: unknown = null,
 ): Promise<DataModel> {
   const fullUrl = url.href;
   const options: RequestInit = { method };
 
   if (headers) {
     options.headers = { ...headers };
-  }
-
-  if (data) {
-    options.body = JSON.stringify(data);
   }
 
   try {

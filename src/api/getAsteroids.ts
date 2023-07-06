@@ -1,23 +1,27 @@
 import { formatAsteroids } from "../helperFunctions/formatData";
+import { setSearchParams } from "../helperFunctions/setSearchParams";
 import { AsteroidsInfo } from "../types/AsteroidInfo";
 import { ErrorMessage } from "../types/ErrorMessages"
 import { requestMethods } from "./fetchData"
 
 export const getAsteroids = async (date: string) => {
-  // const BASE_URL = import.meta.env.BASE_URL;
-  const BASE_URL = 'https://api.nasa.gov/neo/rest/v1/feed';
-  const API_KEY = import.meta.env.API_KEY;
-  const searchParams = `?start_date=${date}&end_date=${date}&api_key=PXjG2k4gTiQT1uLnemaLCDAX3RDa7jRbL69WIROx`;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   const url = new URL(BASE_URL);
-  url.search = searchParams;
+  const searchParams = {
+    start_date: date,
+    end_date: date,
+    api_key: API_KEY,
+  }
+
+  url.search = setSearchParams(url.searchParams, searchParams);
 
   try {
     const asteroids = await requestMethods.get<AsteroidsInfo>(url);
+    const formattedAsteroids = formatAsteroids(asteroids, date);
 
-    const formatedAsteroids = formatAsteroids(asteroids, date);
-
-    console.log(formatedAsteroids);
+    return formattedAsteroids;
   } catch (error) {
     throw new Error(error as ErrorMessage)
   }
