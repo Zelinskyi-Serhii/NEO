@@ -37,6 +37,7 @@ export const formatAsteroids = (asteroids: AsteroidsInfo, date: string) => {
     potentiallyDangerousSum,
     closestNEO,
     fastestNEO,
+    totalAsteroids: data.length
   }
 
   return statisticPerDay;

@@ -25,6 +25,7 @@ export const AsteroidList: FC<Props> = ({ asteroids, sortedAsteroids }) => (
         <TableCell align="right">Potentially Dangerous</TableCell>
         <TableCell align="right">Closest Asteroid</TableCell>
         <TableCell align="right">Fastest Asteroid</TableCell>
+        <TableCell align="right">Total Asteroids per Day</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
@@ -36,6 +37,7 @@ export const AsteroidList: FC<Props> = ({ asteroids, sortedAsteroids }) => (
           potentiallyDangerousSum,
           closestNEO,
           fastestNEO,
+          totalAsteroids,
         } = asteroid;
         const isTheMostDangerous = [...sortedAsteroids]
           .some(asteroid => asteroid.id === id) && potentiallyDangerousSum > 0;
@@ -53,6 +55,7 @@ export const AsteroidList: FC<Props> = ({ asteroids, sortedAsteroids }) => (
             <TableCell align="right">{potentiallyDangerousSum}</TableCell>
             <TableCell align="right">{`${closestNEO}km`}</TableCell>
             <TableCell align="right">{`${fastestNEO}km`}</TableCell>
+            <TableCell align="right">{totalAsteroids}</TableCell>
           </TableRow>
         )}
       )}

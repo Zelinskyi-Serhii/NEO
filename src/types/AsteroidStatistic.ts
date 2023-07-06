@@ -5,4 +5,5 @@ export interface AsteroidStatistic {
   potentiallyDangerousSum: number,
   closestNEO: number,
   fastestNEO: number,
+  totalAsteroids: number,
 }
